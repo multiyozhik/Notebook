@@ -1,0 +1,59 @@
+﻿<Window x:Class="WpfClientApp.Views.ContactsWindow"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+       
+      xmlns:viewmodels="clr-namespace:WpfClientApp.ViewModels" 
+      d:DataContext="{d:DesignInstance Type=viewmodels:ContactsVM}"
+      mc:Ignorable="d" 
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="Список контактов">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="4*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.Row="0" Grid.ColumnSpan="2">
+            <Border Background="LightGray" BorderBrush="Gray" BorderThickness="1">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" 
+                            Background="LightGray">
+                    <Button Content="Войти" Margin="5" Padding="3" 
+                            Command="{Binding LoginCommand}"/>
+                    <Button Content="Регистрация" Margin="5" Padding="3"
+                            Command="{Binding RegisterCommand}"/>
+                    <Button Content="Список пользователей" Margin="5" Padding="3" 
+                            Command="{Binding GetUsersCommand}"/>
+                    <TextBlock Text="{Binding CurrentUserName}" Margin="5" Padding="3"
+                               VerticalAlignment="Center"/>
+                    <Button Content="Выйти" Margin="5" Padding="3"
+                            Command="{Binding LogoutCommand}"/>                    
+                </StackPanel>
+            </Border>
+        </Grid>        
+        <DataGrid Grid.Column="0" Grid.Row="1" AutoGenerateColumns="False" 
+                      ItemsSource="{Binding Path=ContactsList}"
+                      SelectedItem="{Binding Path=SelectedContact}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Path=Id}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding Path=FamilyName}"/>
+                <DataGridTextColumn Header="Имя" Binding="{Binding Path=Name}"/>
+                <DataGridTextColumn Header="Отчество" Binding="{Binding Path=MiddleName}"/>
+                <DataGridTextColumn Header="Номер телефона" Binding="{Binding Path=PhoneNumber}"/>
+                <DataGridTextColumn Header="Адрес" Binding="{Binding Path=Adress}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <StackPanel Grid.Column="1" Grid.Row="1"  Margin="5">
+            <Button Content="Добавить" Command="{Binding AddContactCommand}"
+                    Margin="5" Padding="3"/>
+            <Button Content="Изменить" Command="{Binding ChangeContactCommand}"
+                    Margin="5" Padding="3"/>           
+            <Button Content="Удалить" Command="{Binding DeleteContact}"
+                    Margin="5" Padding="3"/>            
+        </StackPanel>
+    </Grid>
+</Window>

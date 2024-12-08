@@ -1,0 +1,34 @@
+﻿@model Contact
+@{
+    ViewBag.Title = "Сведения о контакте";
+}
+ <h2>Сведения о контакте</h2> 
+
+<table class="table table-light table-hover table-bordered caption-top">
+    <caption>Данные по контакту @Model.Description</caption>
+    <tr>
+        <td>Id</td>
+        <td>@Model.Id</td>
+    </tr>
+    <tr>
+        <td>Фамилия</td>
+        <td>@Model.FamilyName</td>
+    </tr>
+    <tr>
+        <td>Имя</td>
+        <td>@Model.Name</td>
+    </tr>
+    <tr>
+        <td>Отчество</td>
+        <td>@Model.MiddleName</td>
+    </tr>
+    <tr>
+        <td>Номер телефона</td>
+        <td>@Model.PhoneNumber</td>
+    </tr>
+    <tr>
+        <td>Адрес</td>
+        <td>@Model.Adress</td>
+    </tr>
+</table>
+

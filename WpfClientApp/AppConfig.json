@@ -1,0 +1,5 @@
+﻿{
+  "ConnectionStrings": {
+    "ContactsConString": "Server=(localdb)\\mssqllocaldb;Database=notebook;Trusted_Connection=True;"
+  } 
+}

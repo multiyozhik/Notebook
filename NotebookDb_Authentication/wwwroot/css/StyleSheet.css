@@ -1,0 +1,11 @@
+﻿@import url(StyleSheet.css);
+
+body {
+    margin: 0;
+}
+
+.parent {
+    margin: 20px; /* Отступы вокруг элемента */
+    background: #e2edc1;
+    padding: 10px; /* Поля вокруг текста */
+}   

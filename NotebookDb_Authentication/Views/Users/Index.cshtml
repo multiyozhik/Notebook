@@ -1,0 +1,35 @@
+﻿@model UsersModel
+
+@{
+    ViewBag.Title = "Список пользователей";
+}
+
+<table class="table table-light table-striped table-hover table-bordered caption-top">
+    <caption>
+        Список пользователей
+    </caption>
+    <thead>
+    <th>Id</th>
+    <th>Имя пользователя</th>
+    <th>Роль</th>
+    </thead>
+    <tbody>
+        @foreach (var user in Model.Users)
+        {
+            <tr>
+                <td>@user.Id</td>
+                <td>@user.UserName</td>
+                <td>
+                    <form method="get" action="ChangeRole/@user.UserName">
+                        <input asp-for="@user.IsAdmin" type="checkbox" name="IsAdmin" value=@user.IsAdmin/>
+                    </form>
+                </td>
+                <td>
+                    <form method="post" action="Users/DeleteUser/@user.Id">
+                        <input type="submit" value="Удалить" class="btn btn-secondary" />
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
