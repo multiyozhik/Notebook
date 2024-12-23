@@ -17,7 +17,7 @@ namespace _21_NotebookDb.Api
             _signInManager = signInManager;
         }       
 
-        [Route("api/login")]  //api login-метод 
+        [Route("api/login")] 
         [HttpPost]
         // !!![FromBody] важно, иначе null в свойствах модели, т.к. где-то в FromForm искал
         public async Task<StatusCodeResult> ApiLogin([FromBody] LoginModel model)
@@ -35,7 +35,7 @@ namespace _21_NotebookDb.Api
             return new StatusCodeResult(200);
         }        
 
-        [Route("api/register")]  //api register-метод
+        [Route("api/register")] 
         [HttpPost]
         public async Task<StatusCodeResult> ApiRegister([FromBody] RegisterModel model)
         {
@@ -55,7 +55,7 @@ namespace _21_NotebookDb.Api
 
         [Route("api/logout")]
         [HttpGet, ValidateAntiForgeryToken]
-        public async Task LogOut()  // api logout метод
+        public async Task LogOut()  
         {
             await _signInManager.SignOutAsync();
         }

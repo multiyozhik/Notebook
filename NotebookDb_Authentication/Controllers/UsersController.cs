@@ -7,24 +7,31 @@ namespace _21_NotebookDb.Controllers
     [Authorize(Policy = "OnlyForAdminRole")]
     public class UsersController: Controller
     {
-        public UsersModel UserModel { get; }        
+        public UsersModel UsersModel { get; }        
 
         public UsersController(UsersModel model)
         { 
-            UserModel = model;
+            UsersModel = model;
         }
                 
         [HttpGet] //вывод списка пользователей (UserName, IsAdmin, возможности DeleteUser)
         public IActionResult Index()
         {
-            UserModel.UpdateUsers();
-            return View(UserModel);
+            this.UsersModel.UpdateUsers();
+            return View(UsersModel);
         }
-                
-        [HttpPost] //удаление пользователя администратором
+
+		[HttpPost] //изменение роли администратом по checkbox
+		public async Task<IActionResult> ChangeRole(string id, bool isAdmin)
+		{
+			await UsersModel.ChangeRole(id, isAdmin);
+            return RedirectToAction("Index");
+		}
+
+		[HttpPost] //удаление пользователя администратором
         public async Task<IActionResult> DeleteUser(string id)
         {
-            await UserModel.DeleteUser(id);            
+            await UsersModel.DeleteUser(id);            
             return RedirectToAction("Index");
         }
     }

@@ -11,9 +11,7 @@
     
     <a asp-controller="Authenticate" asp-action="Login">Login</a>
     <a asp-controller="Authenticate" asp-action="Register">Register</a>
-    <a asp-controller="Users" asp-action="Index">Список пользователей</a>
-    
-
+    <a asp-controller="Users" asp-action="Index">Список пользователей</a> 
 </div>
 
 <form method="get" asp-controller="Home" asp-action="GetCreatingContactView" class="role">
@@ -46,12 +44,12 @@
             <td>@person.Name</td>
             <td>@person.MiddleName</td>
             <td>
-                    <form method="get" action="/Home/GetChangingContactView/@person.Id">
+                <form method="get" action="/Home/GetChangingContactView/@person.Id">
                     <input type="submit" value="Изменить" class="btn btn-primary" />
                 </form>
             </td>
             <td>
-                    <form method="post" action="/Home/DeleteContact/@person.Id">
+                <form method="post" action="/Home/DeleteContact/@person.Id">
                     <input type="submit" value="Удалить" class="btn btn-secondary" />
                 </form>
             </td>

@@ -31,6 +31,5 @@ namespace _21_NotebookDb.Models
             Context.Contacts.Remove(deletingContact);
             await Context.SaveChangesAsync();
         }
-
     }
 }

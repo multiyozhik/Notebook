@@ -9,9 +9,9 @@
         Список пользователей
     </caption>
     <thead>
-    <th>Id</th>
-    <th>Имя пользователя</th>
-    <th>Роль</th>
+        <th>Id</th>
+        <th>Имя пользователя</th>
+        <th>Роль администратора</th>
     </thead>
     <tbody>
         @foreach (var user in Model.Users)
@@ -20,12 +20,23 @@
                 <td>@user.Id</td>
                 <td>@user.UserName</td>
                 <td>
-                    <form method="get" action="ChangeRole/@user.UserName">
-                        <input asp-for="@user.IsAdmin" type="checkbox" name="IsAdmin" value=@user.IsAdmin/>
-                    </form>
+                    @if (@user.IsAdmin == true)
+                    {
+                        <form method="post" asp-controller="Users" asp-action="ChangeRole" asp-route-id="@user.Id" asp-route-isadmin="false">
+                            <input type="hidden" asp-for="@user.Id" />
+                            <input type="submit" value="Снять роль админа" class="btn btn-secondary" />
+                        </form>
+                    }
+                    else
+                    {
+                        <form method="post" asp-controller="Users" asp-action="ChangeRole" asp-route-id="@user.Id" asp-route-isadmin="true">
+                            <input type="hidden" asp-for="@user.Id" />
+                            <input type="submit" value="Назначить админом" class="btn btn-secondary" />
+                        </form>
+                    }                      
                 </td>
                 <td>
-                    <form method="post" action="Users/DeleteUser/@user.Id">
+                    <form method="post" action="/Users/DeleteUser/@user.Id">
                         <input type="submit" value="Удалить" class="btn btn-secondary" />
                     </form>
                 </td>

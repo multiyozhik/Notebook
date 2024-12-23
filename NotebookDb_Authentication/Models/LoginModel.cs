@@ -10,6 +10,6 @@ namespace _21_NotebookDb.Models
         [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
-        public string ReturnUrl { get; set; } = "/Home/Index";
+        public string? ReturnUrl { get; set; } = "/Home/Index";
     }
 }

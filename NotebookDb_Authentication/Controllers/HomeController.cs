@@ -6,8 +6,6 @@ using System.Text.RegularExpressions;
 
 namespace _21_NotebookDb.Controllers
 {
-    //в HomeController в конструктор подкладываем HomeModel и
-    //следим за соответствием названий методов контроллера и названий View соотв. папки контроллера
     [Authorize]
     public class HomeController : Controller
     {

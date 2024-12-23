@@ -22,9 +22,6 @@ namespace _21_NotebookDb
             services.AddTransient<HomeModel>();
             services.AddTransient<UsersModel>();
 
-            //System.InvalidOperationException: "Endpoint Routing does not support
-            //'IApplicationBuilder.UseMvc(...)'. To use 'IApplicationBuilder.UseMvc'
-            //set 'MvcOptions.EnableEndpointRouting = false' inside 'ConfigureServices(...)."
             services.AddMvc(options => options.EnableEndpointRouting = false);
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -33,20 +30,19 @@ namespace _21_NotebookDb
 
             services.Configure<IdentityOptions>(options =>
             {
-                options.Password.RequiredLength = 6; // минимальное количество знаков в пароле
-                options.Lockout.MaxFailedAccessAttempts = 10; // количество попыток о блокировки
+                options.Password.RequiredLength = 6; 
+                options.Lockout.MaxFailedAccessAttempts = 10; 
                 options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
                 options.Lockout.AllowedForNewUsers = true;
             });
 
             services.ConfigureApplicationCookie(options =>
             {
-                // конфигурация Cookie с целью использования их для хранения авторизации
                 options.Cookie.HttpOnly = true;
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(30);
-                //options.Cookie.Expiration = TimeSpan.FromMinutes(30);
-                options.LoginPath = "/Authenticate/Login";
-                options.LogoutPath = "/Authenticate/Logout";
+				options.AccessDeniedPath = "/Authenticate/Login";
+				options.LoginPath = "/Authenticate/Login";
+				options.LogoutPath = "/Authenticate/Logout";
                 options.SlidingExpiration = true;
             });
 
@@ -75,17 +71,7 @@ namespace _21_NotebookDb
                     template: "{controller=Home}/{action=Index}/{id?}");                    
             });
 
-            ConfigureRoles(userManager, roleManager);
-        }
-
-        public void ConfigureRoles(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
-        {
-            if (!roleManager.RoleExistsAsync("Admin").Result)
-            {
-                IdentityRole role = new IdentityRole();
-                role.Name = "Admin";
-                IdentityResult roleResult = roleManager.CreateAsync(role).Result;
-            }
-        }
+			ApplicationDbContext.CreateAdminAccount(app.ApplicationServices, Configuration).Wait();
+		}
     }
 }

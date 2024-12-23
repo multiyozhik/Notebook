@@ -30,9 +30,13 @@ namespace _21_NotebookDb.Controllers
         [HttpPost]
         public async Task<IActionResult> Login(LoginModel model)
         {
+            var test = await _userManager.GetUsersInRoleAsync("Admin");
+
+
             if (ModelState.IsValid)
             {
-                var loginResult = await _signInManager.PasswordSignInAsync(model.Username,
+                var loginResult = await _signInManager.PasswordSignInAsync(
+                    model.Username,
                     model.Password,
                     false,
                     lockoutOnFailure: false);
