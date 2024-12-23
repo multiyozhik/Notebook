@@ -2,6 +2,6 @@
 {
     static class BaseRoute
     {
-        public const string baseAddress = "http://localhost:5136";
+        public const string baseAddress = "http://localhost:44396";
     }
 }
